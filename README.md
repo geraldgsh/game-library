@@ -74,23 +74,27 @@ Usage
 Run tests
 Deployment
 
-## Authors
+### Original Project Source
 
-👤 **Author1**
+https://www.theodinproject.com/courses/javascript/lessons/library
 
-Github: @izaiasneto4
-Twitter: @izaiasneto_
-Linkedin: linkedin
+### Github Repo
 
-Github: (geraldgsh)[https://github.com/geraldgsh]
-Twitter: (geraldgsh)[https://github.com/geraldgsh]
-Linkedin: (Gerald Goh)[https://www.linkedin.com/geraldgsh]
+https://github.com/geraldgsh/game-library
+
+## Author
+
+👤 **Author**
+
+Github: [geraldgsh](https://github.com/geraldgsh).
+Twitter: [geraldgsh](https://github.com/geraldgsh).
+Linkedin: [Gerald Goh](https://www.linkedin.com/geraldgsh).
 
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/geraldgsh/societalbook/issues).
+Feel free to check the [issues page](https://github.com/geraldgsh/game-library/issues).
 
 ## Show your support
 
