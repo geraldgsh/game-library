@@ -31,8 +31,6 @@ const addGameToLibrary = (ev)=> {
   //for display purposes only
   render();
   console.warn('added' , {myLibrary} );
-  // let pre = document.querySelector('#msg pre');
-  // pre.textContent = '\n' + JSON.stringify(myLibrary, '\t', 2);
 
   //saving to localStorage
   localStorage.setItem('library', JSON.stringify(myLibrary) );
@@ -103,6 +101,12 @@ function remove() {
   updateLocalStorage(myLibrary);
   render();
 }
+
+myLibrary.push(new Game('Silent Hill', 'Konami', "Playstation", "Horror", 1999, "Played"));
+updateLocalStorage(myLibrary[0]);
+myLibrary.push(new Game('Mario Kart', 'Nintendo', "Nintendo", "Action", 1992, "Played"));
+updateLocalStorage(myLibrary[1]);
+render();
 
 myLibrary.forEach((game) => { Object.setPrototypeOf(game, Game.prototype); });
 function updateLocalStorage() {
