@@ -1,11 +1,8 @@
-# Microverse Project Title - Library [Collaborative Project]
-
-Javascript
+# Odin Project Title - Game Library 
 
 ### Introduction.
-This is the first project of the Javascript module. It is preceded by the lesson about Objects and the Object Constructor.
 
-You can find the original project specification at: https://www.theodinproject.com/courses/javascript/lessons/library
+https://www.theodinproject.com/courses/javascript/lessons/library
 
 ### Project Setup
 
@@ -52,15 +49,15 @@ function addBookToLibrary() {
 }
 ```
 
-Library
-This is a small App for libraries built with Vanilla JS, CSS & HTML.
+Game Library
+This is a small App for libraries built with Bulma, JS, CSS & HTML.
 
 screenshot
 
 Additional description about the project and its features.
 
 Built With:
-* Vanilla JS
+* Bulma
 
 Live Demo
 (Click here)[]
@@ -76,29 +73,35 @@ Install
 Usage
 Run tests
 Deployment
-Authors
 
-bust_in_silhouette Authors
+## Authors
+
+👤 **Author1**
 
 Github: @izaiasneto4
 Twitter: @izaiasneto_
 Linkedin: linkedin
 
-Github: @githubhandle
-Twitter: @twitterhandle
-Linkedin: (Izaias Neto)[https://www.linkedin.com/in/izaias-neto-69bb0a18a/]
+Github: (geraldgsh)[https://github.com/geraldgsh]
+Twitter: (geraldgsh)[https://github.com/geraldgsh]
+Linkedin: (Gerald Goh)[https://www.linkedin.com/geraldgsh]
 
-handshake Contributing
+## 🤝 Contributing
+
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the issues page.
+Feel free to check the [issues page](https://github.com/geraldgsh/societalbook/issues).
 
-Show your support
-Give a star if you like this project!
+## Show your support
 
-Acknowledgments
-Hat tip to anyone whose code was used
-Inspiration
-etc
-memo License
-This project is MIT licensed.
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- Hat tip to anyone whose code was used
+- Inspiration
+- etc
+
+## 📝 License
+
+This project is [MIT](lic.url) licensed.
