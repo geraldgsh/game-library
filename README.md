@@ -87,7 +87,9 @@ https://github.com/geraldgsh/game-library
 👤 **Author**
 
 Github: [geraldgsh](https://github.com/geraldgsh).
+
 Twitter: [geraldgsh](https://github.com/geraldgsh).
+
 Linkedin: [Gerald Goh](https://www.linkedin.com/geraldgsh).
 
 ## 🤝 Contributing
