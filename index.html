@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8">
+  <title>Game Library</title>
+  <link href="style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">  
+</head>
+
+<body>
+  <section class="columns">
+    <div class="column shelf is-3">
+      <div class="row">
+        <h4 class="title is-4" style="color:white;">Gameshelf</h4>
+        <div class="open-btn">
+          <button class="button is-primary" onclick="openForm()"><strong>New Game</strong></button>
+        </div>
+        <!-- <div id="msg">
+          <pre style="background-color: lightgray;"></pre>
+        </div> -->
+      </div>      
+    </div>
+    <div class="login-popup">
+      <div class="form-popup" id="popupForm">
+        <form class="form-container">
+          <h4 class="title is-4">Please add a game</h2>
+          <label for="title"><strong>Title</strong></label>
+          <input type="text" name="title" id="title" placeholder="Title" required>
+
+          <label for="publisher"><strong>Publisher</strong></label>
+          <input type="text" name="publisher" id="publisher" placeholder="publisher" required>
+
+          <div class="formBox">
+            <label for="platform"><strong>Platform</strong></label>
+            <input type="text" name="platform" id="platform" placeholder="Platform" required>
+          </div>
+
+          <div class="formBox">
+            <label for="year"><strong>Release Year</strong></label>
+            <input type="number" name="year" id="year" placeholder="Year Released" required>
+          </div>
+          
+          <div class="formBox">    
+            <label for="genre"><strong>Genre</strong></label>
+            <select name="genre" id="genre" required>
+              <option value="action">Action</option>
+              <option value="adventure">Adventure</option>
+              <option value="RPG">RPG</option>
+              <option value="FPS">FPS</option>
+              <option value="MMO">MMO</option>
+              <option value="MMORPG">MMORPG</option>
+              <option value="MOBA">MOBA</option>
+              <option value="puzzle">Puzzle</option>
+              <option value="horror">Horror</option>
+              <option value="combat">Combat</option>
+            </select>
+          </div>
+
+          <div class="formBox">
+            <div class="form-check">
+              <label for="played?">Not Played?</label>
+              <input id="played?" type="checkbox" name="Played?">
+            </div>
+          </div>
+
+          <button type="submit" id="btn" class="btn">Click to Add</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+        </form>
+      </div>
+    </div>
+    <div class="column list is-9">
+      <table class = "table is-bordered" id="library_catalog">
+        <tr class="lib_category">
+          <th>Title</th>
+          <th>Publisher</th>
+          <th>Platform</th>
+          <th>Release Year</th>
+          <th>Genre</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+        <tbody id="lib_content"></tbody>
+      </table>
+    </div> 
+  </section> 
+  <script src="script.js"></script>
+</body>
+</html>
