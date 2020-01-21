@@ -13,6 +13,11 @@ function Game(title, publisher, platform, genre, year, played) {
   }
 }
 
+myLibrary.forEach((game) => { Object.setPrototypeOf(game, Game.prototype); });
+function updateLocalStorage() {
+  window.localStorage.setItem('library', JSON.stringify(myLibrary));
+}
+
 const addGameToLibrary = (ev)=> {
   ev.preventDefault();  //to stop blank form submission
   var title = document.getElementById('title').value;
@@ -31,8 +36,6 @@ const addGameToLibrary = (ev)=> {
   //for display purposes only
   render();
   console.warn('added' , {myLibrary} );
-  // let pre = document.querySelector('#msg pre');
-  // pre.textContent = '\n' + JSON.stringify(myLibrary, '\t', 2);
 
   //saving to localStorage
   localStorage.setItem('library', JSON.stringify(myLibrary) );
@@ -75,7 +78,7 @@ function render() {
   }
   let allToggle = document.querySelectorAll("#toggle");
   for( const toggles of allToggle){
-      toggles.addEventListener('click', toggle)
+      toggles.addEventListener('click', toggle);
   }
   // if (storageAvailable('localStorage')) {
   //   localStorage.setObj("library", myLibrary);
@@ -104,10 +107,11 @@ function remove() {
   render();
 }
 
-myLibrary.forEach((game) => { Object.setPrototypeOf(game, Game.prototype); });
-function updateLocalStorage() {
-  window.localStorage.setItem('library', JSON.stringify(myLibrary))
-}
+myLibrary.push(new Game('Silent Hill', 'Konami', 'Playstation', 'Horror', 1999, 'Played'));
+updateLocalStorage(myLibrary[0]);
+myLibrary.push(new Game('Mario Kart', 'Nintendo', 'Nintendo', 'Action', 1992, 'Played'));
+updateLocalStorage(myLibrary[1]);
+render();
 
 function openForm() {
   document.getElementById("popupForm").style.display="block";
