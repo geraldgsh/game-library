@@ -32,11 +32,9 @@ const addGameToLibrary = (ev)=> {
   document.forms[0].reset(); // to clear the form for the next entries
   closeForm();
   secondTable.innerHTML="";
-
   //for display purposes only
   render();
   console.warn('added' , {myLibrary} );
-
   //saving to localStorage
   localStorage.setItem('library', JSON.stringify(myLibrary) );
 }
@@ -68,7 +66,6 @@ function render() {
     cell5.innerHTML = myLibrary[i].genre;
     cell6.innerHTML = `<button class="button is-primary">${myLibrary[i].played}</button>`;
     cell6.id = "toggle"; //to toggle played and not played.
-    // cell5.innerHTML = i + 1;
     cell7.innerHTML = `<button class="button is-danger">Delete</button>`;
     cell7.id = "remove";//add remove id to select it if you want to remove the game.      
   }
