@@ -15,7 +15,7 @@ function Game(title, publisher, platform, genre, year, played) {
 
 myLibrary.forEach((game) => { Object.setPrototypeOf(game, Game.prototype); });
 function updateLocalStorage() {
-  window.localStorage.setItem('library', JSON.stringify(myLibrary))
+  window.localStorage.setItem('library', JSON.stringify(myLibrary));
 }
 
 const addGameToLibrary = (ev)=> {
@@ -78,7 +78,7 @@ function render() {
   }
   let allToggle = document.querySelectorAll("#toggle");
   for( const toggles of allToggle){
-      toggles.addEventListener('click', toggle)
+      toggles.addEventListener('click', toggle);
   }
   // if (storageAvailable('localStorage')) {
   //   localStorage.setObj("library", myLibrary);
