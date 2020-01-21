@@ -8,6 +8,7 @@ https://www.theodinproject.com/courses/javascript/lessons/library
 ### Screenshot
 
 ![image](/img/screenshot.JPG "screenshot")
+<br>
 
 ### Project Setup
 
