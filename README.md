@@ -16,13 +16,13 @@ https://www.theodinproject.com/courses/javascript/lessons/library
 
 ### Constructor
 
-2. Book objects are going to be stored in a simple array, so add a function to the script (not the constructor) that can take user’s input. 
+2. Game objects are going to be stored in a simple array, so add a function to the script (not the constructor) that can take user’s input. 
 
 ```javascript
 let myLibrary = [];
 ```
 
-Store the new book objects into an array.
+Store the new game objects into an array.
 
 ```javascript
 function Game(title, publisher, platform, genre, year, played) {
@@ -61,7 +61,7 @@ function addGameToLibrary() {
 
 ### render()
 
-3. Hook the array up to your HTML with a render() function that loops through the array and displays each book on the page. You can display them in some sort of table, or each on their own “card”. It might help for now to manually add a few books to your array so you can see the display.
+3. Hook the array up to your HTML with a render() function that loops through the array and displays each game on the page. You can display them in some sort of table, or each on their own “card”. It might help for now to manually add a few games to your array so you can see the display.
 
 ```javascript
 const addGameToLibrary = (ev)=> {
@@ -176,9 +176,9 @@ Source [here](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttrib
 + Every innerHTML displays properties for myLibrary array (i.e. title, platform, year etc).
 <br>
 
-### “NEW BOOK” button
+### “NEW GAME” button
 
-4. Add a “NEW BOOK” button that brings up a form allowing users to input the details for the new book: author, title, number of pages, whether it’s been read and anything else you might want.
+4. Add a “NEW GAME” button that brings up a form allowing users to input the details for the new game: author, title, number of pages, whether it’s been read and anything else you might want.
 
 ```html
 <div class="open-btn">
@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 ### Remove
 
-5. Add a button on each book’s display to remove the book from the library. You will need to associate your DOM elements with the actual book objects in some way. One easy solution is giving them a data-attribute that corresponds to the index of the library array.
+5. Add a button on each game’s display to remove the game from the library. You will need to associate your DOM elements with the actual game objects in some way. One easy solution is giving them a data-attribute that corresponds to the index of the library array.
 
 ```javascript
 function render() {
@@ -308,8 +308,8 @@ function remove() {
 
 ### Status
 
-6. Add a button on each book’s display to change its read status.
-To facilitate this you will want to create the function that toggles a book’s read status on your Book prototype instance.
+6. Add a button on each game’s display to change its read status.
+To facilitate this you will want to create the function that toggles a game’s read status on your Game prototype instance.
 
 ```javascript
 function render() {
