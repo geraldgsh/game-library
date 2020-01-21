@@ -29,7 +29,8 @@ const addGameToLibrary = (ev)=> {
   var newGame = new Game(title, publisher, platform, genre, year, played);
   myLibrary.push(newGame);
   updateLocalStorage(myLibrary);
-  document.forms[0].reset(); // to clear the form for the next entries
+  // to clear the form for the next entries
+  document.forms[0].reset(); 
   closeForm();
   secondTable.innerHTML="";
   //for display purposes only
