@@ -1,11 +1,13 @@
-var myLibrary = [];
+/* eslint-disable no-use-before-define */
+/* eslint-disable linebreak-style */
+const myLibrary = [];
 function Game(title, publisher, platform, genre, year, played) {
   this.title = title;
   this.publisher = publisher;
   this.platform = platform;
   this.genre = genre;
   this.year = year;
-  if(played == false) {
+  if (played === false) {
     this.played = 'Not-Played';
   } else {
     this.played = 'Played';
@@ -17,38 +19,42 @@ function updateLocalStorage() {
   window.localStorage.setItem('library', JSON.stringify(myLibrary));
 }
 
-const table = document.getElementById("library_catalog");
-const secondTable = document.getElementById("lib_content");
-
-const addGameToLibrary = (ev)=> {
-  ev.preventDefault();  //to stop blank form submission
+const addGameToLibrary = (ev) => {
+  // to stop blank form submission
+  ev.preventDefault();
   const title = document.getElementById('title').value;
   const publisher = document.getElementById('publisher').value;
   const platform = document.getElementById('platform').value;
   const genre = document.getElementById('genre').value;
   const year = document.getElementById('year').value;
+  // eslint-disable-next-line no-multi-assign
   const played = document.getElementById('played?').checked = true;
   const newGame = new Game(title, publisher, platform, genre, year, played);
-  myLibrary.push(newGscriame);
+  myLibrary.push(newGame);
   updateLocalStorage(myLibrary);
-  // to clear the form for the next entries
-  document.forms[0].reset();
+  document.forms[0].reset(); // to clear the form for the next entries
   closeForm();
-  secondTable.innerHTML='';
-  //for display purposes only
+  secondTable.innerHTML = '';
+  // for display purposes only
   render();
+  // eslint-disable-next-line no-console
   console.warn('added', { myLibrary });
-  //saving to localStorage
+  // saving to localStorage
   localStorage.setItem('library', JSON.stringify(myLibrary));
-}
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn').addEventListener('click', addGameToLibrary);
 });
 
+// eslint-disable-next-line no-unused-vars
+const table = document.getElementById('library_catalog');
+const secondTable = document.getElementById('lib_content');
+
 function render() {
   secondTable.innerHTML = '';
-  for (let i = myLibrary.length - 1; i >= 0; -i) {
+  // eslint-disable-next-line no-plusplus
+  for (let i = myLibrary.length - 1; i >= 0; i--) {
     const row = secondTable.insertRow(0);
     row.setAttribute('data-index', `${i}`);
     const cell1 = row.insertCell(0);
@@ -63,16 +69,23 @@ function render() {
     cell3.innerHTML = myLibrary[i].publisher;
     cell4.innerHTML = myLibrary[i].year;
     cell5.innerHTML = myLibrary[i].genre;
-    cell6.innerHTML = `<button class="button is-primary">${myLibrary[i].played}</button>`;
-    cell6.id = 'toggle'; //to toggle played and not played.
-    cell7.innerHTML = `<button class="button is-danger">Delete</button>`;
-    cell7.id = 'remove'; //add remove id to select it if you want to remove the game.
-  let allremoveButton  = document.querySelectorAll("#remove");
+    cell6.innerHTML = `<button class='button is-primary'>${myLibrary[i].played}</button>`;
+    // to toggle played and not played.
+    cell6.id = 'toggle';
+    // cell5.innerHTML = i + 1;
+    // eslint-disable-next-line quotes
+    cell7.innerHTML = `<button class='button is-danger'>Delete</button>`;
+    // add remove id to select it if you want to remove the game.
+    cell7.id = 'remove';
+  }
+  const allremoveButton = document.querySelectorAll('#remove');
+  // eslint-disable-next-line no-restricted-syntax
   for (const button of allremoveButton) {
     button.addEventListener('click', remove);
   }
-  let allToggle = document.querySelectorAll("#toggle");
-  for( const toggles of allToggle){
+  const allToggle = document.querySelectorAll('#toggle');
+  // eslint-disable-next-line no-restricted-syntax
+  for (const toggles of allToggle) {
     toggles.addEventListener('click', toggle);
   }
 }
@@ -93,7 +106,7 @@ function toggle(e) {
 }
 
 function remove() {
-  myLibrary.splice(Number(this.parentNode.dataset.index),1);
+  myLibrary.splice(Number(this.parentNode.dataset.index), 1);
   updateLocalStorage(myLibrary);
   render();
 }
@@ -104,10 +117,11 @@ myLibrary.push(new Game('Mario Kart', 'Nintendo', 'Nintendo', 'Action', 1992, 'P
 updateLocalStorage(myLibrary[1]);
 render();
 
+// eslint-disable-next-line no-unused-vars
 function openForm() {
-  document.getElementById('popupForm').style.display='block';
-};
+  document.getElementById('popupForm').style.display = 'block';
+}
 
 function closeForm() {
-  document.getElementById('popupForm').style.display='none';
-};
+  document.getElementById('popupForm').style.display = 'none';
+}

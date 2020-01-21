@@ -360,6 +360,75 @@ function toggle(e) {
 + "toggle" function evaluates current status and change to its inverse when function is called when button is clicked. Status changes are updated to local storage then rendered.
 <br>
 
+### Linter Setup
+
+Clone file [content](https://github.com/microverseinc/linters-config/tree/master/javascript) into root directory (except for readme.md)
+
+Install ESLint on Linux environment using the following commands
+
+Install Node Version Manager to update NodeJS + NPM.
+
+```sh
+$curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+
+$export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+
+$[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+```
+
+Run the following command to verify installation;
+
+```sh
+$ command -v 
+nvm
+```
+
+To download, compile, and install the latest release of node, do this.
+
+```sh
+nvm install node
+```
+
+Source [here](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+Install ESlint with following command
+
+```sh
+npm install eslint
+```
+
+Run the following to configure eslint
+
+```sh
+eslint --init
+```
+
+with the following setup.
+
+`? How would you like to use ESLint?` To check syntax, find problems, and enforce code style
+
+`? What type of modules does your project use?` JavaScript modules (import/export)
+
+`? Which framework does your project use?`  None of these
+
+`? Does your project use Typescript`  No
+
+`? Where does your code run?`     Browser
+
+`? How would you like to define a style for your project?` Use a popular style guide
+
+`? Which style guide do you want to follow?`      Airbnb
+
+`? What format do you want your config file to be in?` JSON
+
+`The config that you've selected requires the following dependencies: ? Would you like to install them now with npm?` Yes
+
+Start ESlint with this command.
+
+```sh
+eslint script.js
+```
+
 #### Game Library
 This is a small App for libraries built with Bulma, JS, CSS & HTML.
 
