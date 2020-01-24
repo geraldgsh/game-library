@@ -7,16 +7,17 @@ function Game(title, publisher, platform, genre, year, played) {
   this.platform = platform;
   this.genre = genre;
   this.year = year;
-  if (played === false) {
-    this.played = 'Not-Played';
-  } else {
-    this.played = 'Played';
-  }
+  this.played = played;
+  // if (played === false) {
+  //   this.played = 'Not-Played';
+  // } else {
+  //   this.played = 'Played';
+  // }
 }
 
 myLibrary.forEach((game) => { Object.setPrototypeOf(game, Game.prototype); });
-function updateLocalStorage() {
-  window.localStorage.setItem('library', JSON.stringify(myLibrary));
+function updateLocalStorage(arr) {
+  window.localStorage.setItem('library', JSON.stringify(arr));
 }
 
 const addGameToLibrary = (ev) => {
@@ -28,8 +29,8 @@ const addGameToLibrary = (ev) => {
   const genre = document.getElementById('genre').value;
   const year = document.getElementById('year').value;
   // eslint-disable-next-line no-multi-assign
-  const played = document.getElementById('played?').checked = true;
-  const newGame = new Game(title, publisher, platform, genre, year, played);
+  let plays = document.getElementById('status').value;
+  const newGame = new Game(title, publisher, platform, genre, year, plays);
   myLibrary.push(newGame);
   updateLocalStorage(myLibrary);
   document.forms[0].reset(); // to clear the form for the next entries
@@ -54,9 +55,9 @@ const secondTable = document.getElementById('lib_content');
 function render() {
   secondTable.innerHTML = '';
   // eslint-disable-next-line no-plusplus
-  for (let i = myLibrary.length - 1; i >= 0; i--) {
+  myLibrary.forEach((book, index) => {
     const row = secondTable.insertRow(0);
-    row.setAttribute('data-index', `${i}`);
+    row.setAttribute('data-index', `${index}`);
     const cell1 = row.insertCell(0);
     const cell2 = row.insertCell(1);
     const cell3 = row.insertCell(2);
@@ -64,20 +65,19 @@ function render() {
     const cell5 = row.insertCell(4);
     const cell6 = row.insertCell(5);
     const cell7 = row.insertCell(6);
-    cell1.innerHTML = myLibrary[i].title;
-    cell2.innerHTML = myLibrary[i].platform;
-    cell3.innerHTML = myLibrary[i].publisher;
-    cell4.innerHTML = myLibrary[i].year;
-    cell5.innerHTML = myLibrary[i].genre;
-    cell6.innerHTML = `<button class='button is-primary'>${myLibrary[i].played}</button>`;
+    cell1.innerHTML = book.title;
+    cell2.innerHTML = book.platform;
+    cell3.innerHTML = book.publisher;
+    cell4.innerHTML = book.year;
+    cell5.innerHTML = book.genre;
+    cell6.innerHTML = `<button class='button is-primary'>${book.played}</button>`;
     // to toggle played and not played.
     cell6.id = 'toggle';
-    // cell5.innerHTML = i + 1;
     // eslint-disable-next-line quotes
     cell7.innerHTML = `<button class='button is-danger'>Delete</button>`;
     // add remove id to select it if you want to remove the game.
     cell7.id = 'remove';
-  }
+  });
   const allremoveButton = document.querySelectorAll('#remove');
   // eslint-disable-next-line no-restricted-syntax
   for (const button of allremoveButton) {
@@ -91,18 +91,19 @@ function render() {
 }
 
 function toggle(e) {
-  if (e.target.classList.contains('not-played')) {
-    e.target.classList.remove('not-played');
+  myLibrary[this.parentNode.dataset.index].played = !myLibrary[this.parentNode.dataset.index].played;
+  updateLocalStorage(myLibrary);
+  if (e.target.classList.contains('Not-Played')) {
+    e.target.classList.remove('Not-Played');
     e.target.textContent = 'Played';
-    myLibrary[Number(e.target.id)].played = 'played';
+    // myLibrary[Number(e.target.id)].played = 'Played';
     // change object property to true
   } else {
-    e.target.classList.add('not-played');
-    e.target.textContent = 'Not Played';
-    myLibrary[Number(e.target.id)].played = 'not-played';
+    e.target.classList.add('Not-Played');
+    e.target.textContent = 'Not-Played';
+    // myLibrary[this.parentNode.dataset.index].played = 'Not-Played';
     // change object property to false
   }
-  updateLocalStorage(myLibrary);
 }
 
 function remove() {
@@ -112,9 +113,8 @@ function remove() {
 }
 
 myLibrary.push(new Game('Silent Hill', 'Konami', 'Playstation', 'Horror', 1999, 'Played'));
-updateLocalStorage(myLibrary[0]);
 myLibrary.push(new Game('Mario Kart', 'Nintendo', 'Nintendo', 'Action', 1992, 'Played'));
-updateLocalStorage(myLibrary[1]);
+updateLocalStorage(myLibrary);
 render();
 
 // eslint-disable-next-line no-unused-vars
