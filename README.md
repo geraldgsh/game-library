@@ -397,7 +397,7 @@ Install ESlint with following command
 npm install eslint
 ```
 
-Run the following to configure eslint
+Run the following to configure eslint in project root folder
 
 ```sh
 eslint --init

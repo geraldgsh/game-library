@@ -8,28 +8,33 @@ function Game(title, publisher, platform, genre, year, played) {
   this.genre = genre;
   this.year = year;
   this.played = played;
-  // if (played === false) {
-  //   this.played = 'Not-Played';
-  // } else {
-  //   this.played = 'Played';
-  // }
 }
 
-myLibrary.forEach((game) => { Object.setPrototypeOf(game, Game.prototype); });
+Game.prototype = {
+  constructor: Game,
+  updateRead() {
+    if (this.played === 'Played') {
+      this.played = 'Not-Played';
+    } else {
+      this.played = 'Played';
+    }
+  },
+};
+
+// myLibrary.forEach((game) => { Object.setPrototypeOf(game, Game.prototype); });
 function updateLocalStorage(arr) {
   window.localStorage.setItem('library', JSON.stringify(arr));
 }
 
-const addGameToLibrary = (ev) => {
+const addGameToLibrary = () => {
   // to stop blank form submission
-  ev.preventDefault();
   const title = document.getElementById('title').value;
   const publisher = document.getElementById('publisher').value;
   const platform = document.getElementById('platform').value;
   const genre = document.getElementById('genre').value;
   const year = document.getElementById('year').value;
   // eslint-disable-next-line no-multi-assign
-  let plays = document.getElementById('status').value;
+  const plays = document.getElementById('status').value;
   const newGame = new Game(title, publisher, platform, genre, year, plays);
   myLibrary.push(newGame);
   updateLocalStorage(myLibrary);
@@ -41,7 +46,7 @@ const addGameToLibrary = (ev) => {
   // eslint-disable-next-line no-console
   console.warn('added', { myLibrary });
   // saving to localStorage
-  localStorage.setItem('library', JSON.stringify(myLibrary));
+  window.localStorage.setItem('library', JSON.stringify(myLibrary));
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -55,7 +60,7 @@ const secondTable = document.getElementById('lib_content');
 function render() {
   secondTable.innerHTML = '';
   // eslint-disable-next-line no-plusplus
-  myLibrary.forEach((book, index) => {
+  myLibrary.forEach((game, index) => {
     const row = secondTable.insertRow(0);
     row.setAttribute('data-index', `${index}`);
     const cell1 = row.insertCell(0);
@@ -65,12 +70,12 @@ function render() {
     const cell5 = row.insertCell(4);
     const cell6 = row.insertCell(5);
     const cell7 = row.insertCell(6);
-    cell1.innerHTML = book.title;
-    cell2.innerHTML = book.platform;
-    cell3.innerHTML = book.publisher;
-    cell4.innerHTML = book.year;
-    cell5.innerHTML = book.genre;
-    cell6.innerHTML = `<button class='button is-primary'>${book.played}</button>`;
+    cell1.innerHTML = game.title;
+    cell2.innerHTML = game.platform;
+    cell3.innerHTML = game.publisher;
+    cell4.innerHTML = game.year;
+    cell5.innerHTML = game.genre;
+    cell6.innerHTML = `<button class='button is-primary'>${game.played}</button>`;
     // to toggle played and not played.
     cell6.id = 'toggle';
     // eslint-disable-next-line quotes
@@ -91,9 +96,9 @@ function render() {
 }
 
 function toggle(e) {
-  myLibrary[this.parentNode.dataset.index].played = !myLibrary[this.parentNode.dataset.index].played;
+  myLibrary[this.parentNode.dataset.index].updateRead();
   updateLocalStorage(myLibrary);
-  if (e.target.classList.contains('Not-Played')) {
+  if (myLibrary[this.parentNode.dataset.index].played === 'Played') {
     e.target.classList.remove('Not-Played');
     e.target.textContent = 'Played';
     // myLibrary[Number(e.target.id)].played = 'Played';
@@ -111,6 +116,7 @@ function remove() {
   updateLocalStorage(myLibrary);
   render();
 }
+
 
 myLibrary.push(new Game('Silent Hill', 'Konami', 'Playstation', 'Horror', 1999, 'Played'));
 myLibrary.push(new Game('Mario Kart', 'Nintendo', 'Nintendo', 'Action', 1992, 'Played'));
