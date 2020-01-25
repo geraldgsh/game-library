@@ -12,7 +12,7 @@ function Game(title, publisher, platform, genre, year, played) {
 
 Game.prototype = {
   constructor: Game,
-  updateRead() {
+  updatePlayed() {
     if (this.played === 'Played') {
       this.played = 'Not-Played';
     } else {
@@ -96,18 +96,15 @@ function render() {
 }
 
 function toggle(e) {
-  myLibrary[this.parentNode.dataset.index].updateRead();
+  myLibrary[this.parentNode.dataset.index].updatePlayed();
   updateLocalStorage(myLibrary);
+  console.warn('Status Change', { myLibrary });
   if (myLibrary[this.parentNode.dataset.index].played === 'Played') {
     e.target.classList.remove('Not-Played');
     e.target.textContent = 'Played';
-    // myLibrary[Number(e.target.id)].played = 'Played';
-    // change object property to true
   } else {
     e.target.classList.add('Not-Played');
     e.target.textContent = 'Not-Played';
-    // myLibrary[this.parentNode.dataset.index].played = 'Not-Played';
-    // change object property to false
   }
 }
 
@@ -115,6 +112,7 @@ function remove() {
   myLibrary.splice(Number(this.parentNode.dataset.index), 1);
   updateLocalStorage(myLibrary);
   render();
+  console.warn('Removed', { myLibrary });
 }
 
 

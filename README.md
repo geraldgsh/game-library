@@ -4,6 +4,8 @@
 
 https://www.theodinproject.com/courses/javascript/lessons/library
 <br>
+Project focus on DOM and data interaction with web browser storage.
+<br>
 
 ### Screenshot
 
@@ -32,12 +34,6 @@ function Game(title, publisher, platform, genre, year, played) {
   this.platform = platform;
   this.genre = genre;
   this.year = year;
-  if(played == false)  {
-    this.played = "Not-Played";
-  } else {
-    this.played = "Played";
-  }
-}
 ```
 <br>
 
@@ -72,7 +68,7 @@ const addGameToLibrary = (ev)=> {
   var platform = document.getElementById('platform').value;
   var genre = document.getElementById('genre').value;
   var year = document.getElementById('year').value;
-  let played = document.getElementById('played?').checked = true;
+  const plays = document.getElementById('status').value;
   .
   .
   .
@@ -89,11 +85,18 @@ An ID should be unique within a page. However, if more than one element with the
 Sources [here](https://www.w3schools.com/jsref/met_document_getelementbyid.asp) and [here](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
 
 ```javascript
+function updateLocalStorage(arr) {
+  window.localStorage.setItem('library', JSON.stringify(arr));
+}
+```
+⋅⋅* Update function to reflect changes in localStorage when there's a new entry, entry deletion or status change.
+
+```javascript
 const addGameToLibrary = (ev)=> {
 .
 .
 .
-  var newGame = new Game(title, publisher, platform, genre, year, played);
+  var newGame = new Game(title, publisher, platform, genre, year, plays);
   myLibrary.push(newGame);
   updateLocalStorage(myLibrary);
   document.forms[0].reset(); // to clear the form for the next entries
@@ -310,7 +313,22 @@ function remove() {
 ### Status
 
 ⋅⋅6. Add a button on each game’s display to change its read status.
-To facilitate this you will want to create the function that toggles a game’s read status on your Game prototype instance.
+To facilitate this you will want to create the function that toggles a game’s played status on your Game prototype instance.
+
+```javascript
+Game.prototype = {
+  constructor: Game,
+  updatePlayed() {
+    if (this.played === 'Played') {
+      this.played = 'Not-Played';
+    } else {
+      this.played = 'Played';
+    }
+  },
+};
+```
+
+⋅⋅* Create protype instance for played status that defines "Played" & "Not-Played" status. Status will be inherited through function call (updatePlayed) above.
 
 ```javascript
 function render() {
@@ -342,18 +360,16 @@ function render() {
 
 ```javascript
 function toggle(e) {
-  if (e.target.classList.contains('not-played')) {
-      e.target.classList.remove('not-played');
-      e.target.textContent = "Played";
-      myLibrary[Number(e.target.id)].played = 'played';
-      // change object property to true
-  } else {
-      e.target.classList.add('not-played');
-      e.target.textContent = "Not Played";
-      myLibrary[Number(e.target.id)].played = 'not-played';
-      // change object property to false
-  }
+  myLibrary[this.parentNode.dataset.index].updatePlayed();
   updateLocalStorage(myLibrary);
+  console.warn('Status Change', { myLibrary });
+  if (myLibrary[this.parentNode.dataset.index].played === 'Played') {
+    e.target.classList.remove('Not-Played');
+    e.target.textContent = 'Played';
+  } else {
+    e.target.classList.add('Not-Played');
+    e.target.textContent = 'Not-Played';
+  }
 }
 ```
 
@@ -391,6 +407,14 @@ nvm install node
 
 Source [here](https://github.com/nvm-sh/nvm#installing-and-updating)
 
+Go project folder using WSL environment and initiate NPM with following command
+
+```javascript
+npm init
+```
+
+Command above will generate a "package.json" file for ESlint work off from.
+
 Install ESlint with following command
 
 ```sh
@@ -409,24 +433,84 @@ with the following setup.
 
 `? What type of modules does your project use?` JavaScript modules (import/export)
 
-`? Which framework does your project use?`  None of these
+`? Which framework does your project use?` None of these
 
-`? Does your project use Typescript`  No
+`? Does your project use Typescript` No
 
-`? Where does your code run?`     Browser
+`? Where does your code run?` Browser
 
 `? How would you like to define a style for your project?` Use a popular style guide
 
-`? Which style guide do you want to follow?`      Airbnb
+`? Which style guide do you want to follow?` Airbnb
 
 `? What format do you want your config file to be in?` JSON
 
-`The config that you've selected requires the following dependencies: ? Would you like to install them now with npm?` Yes
+`? The config that you've selected requires the following dependencies: Would you like to install them now with npm?` Yes
 
 Start ESlint with this command.
 
 ```sh
 eslint script.js
+```
+
+#### Test Procedure
+
+i. On Game Library page right click inspect and click console. Type the following command to view content of browwer's sotrage;
+
+```sh
+
+>> localStorage
+
+Storage
+​
+length: 1
+​
+library: "[{\"title\":\"Silent Hill\",\"publisher\":\"Konami\",\"platform\":\"Playstation\",\"genre\":\"Horror\",\"year\":1999,\"played\":\"Played\"},{\"title\":\"Mario Kart\",\"publisher\":\"Nintendo\",\"platform\":\"Nintendo\",\"genre\":\"Action\",\"year\":1992,\"played\":\"Played\"}]"
+
+```
+
+ii. Change on "Played" button to change status. Then type the following command to view changes.
+
+```sh
+>> localStorage
+
+library: "[{\"title\":\"Silent Hill\",\"publisher\":\"Konami\",\"platform\":\"Playstation\",\"genre\":\"Horror\",\"year\":1999,\"played\":\"Not-Played\"},{\"title\":\"Mario Kart\",\"publisher\":\"Nintendo\",\"platform\":\"Nintendo\",\"genre\":\"Action\",\"year\":1992,\"played\":\"Not-Played\"}]"
+```
+
+iii. Remove game entry with delete button. View content of sotrage.
+
+```sh
+>> localStorage
+
+Storage
+​
+length: 1
+​
+library: "[]"
+```
+
+iv. Click on "New Game" button to create new entry.
+
+```sh
+>> localstorage
+
+Storage
+​
+length: 1
+​
+library: "[{\"title\":\"Sonic\",\"publisher\":\"Sega\",\"platform\":\"Sega\",\"genre\":\"Action\",\"year\":\"1990\",\"played\":\"Played\"}]"
+```
+
+v. Create a new game entry and select "Not-played".
+
+```sh
+>> localstorage
+
+Storage
+​
+length: 1
+​
+library: "[{\"title\":\"Sonic 2\",\"publisher\":\"Sega\",\"platform\":\"Sega\",\"genre\":\"Action\",\"year\":\"1991\",\"played\":\"Not-Played\"}]"
 ```
 
 #### Game Library
@@ -436,7 +520,7 @@ Built With:
 * Bulma
 
 ##### Live Demo
-(Click here)[https://geraldgsh.github.io/game-library/]
+[Click here](https://geraldgsh.github.io/game-library/)
 
 #### Getting Started
 Clone repo and run index.html
